@@ -1,6 +1,6 @@
 public class Durum {
-private String aktuelDurum;
-private boolean aciliyet;
+    private String aktuelDurum;
+    private boolean aciliyet;
 
     public String getAktuelDurum() {
         return aktuelDurum;
@@ -18,9 +18,6 @@ private boolean aciliyet;
         this.aciliyet = aciliyet;
     }
 
-    public static void main(String[] args) {
-
-    }
-    Durum hastaDurumu = new Durum();
-
 }
+
+
