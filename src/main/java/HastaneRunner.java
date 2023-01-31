@@ -1,35 +1,33 @@
+import java.util.Scanner;
+
 public class HastaneRunner {
 
     private static Hastane hastane1 = new Hastane();
-
+    static int sec;
+    static Scanner sc = new Scanner(System.in);
+    static  String hastaDurumu ="Allerji" ;
+    static String unvan = doktorUnvan(hastaDurumu);
 
     public static void main(String[] args) {
-        String hastaDurumu = "Bas agrisi";
-        String unvan = doktorUnvan(hastaDurumu);
-        System.out.println();
 
 
-        System.out.println("Doktor unvan = " + doktorUnvan(hastaDurumu) + "\nHastanın durumu = " + hastaDurumu);
-
-        hastane1.setDoktor(doktorBul(unvan));
-        //System.out.println("Unvan = " + hastane1.getDoktor().getUnvan() + " ");
-        System.out.println("Doktor isimi = " + hastane1.getDoktor().getIsim() + " ");
-        System.out.println("Doktor soyisim = " + hastane1.getDoktor().getSoyIsim() + " ");
-
-        System.out.println();
-        System.out.println("***********hasta bul methodu***********");
-        System.out.println();
-
-        hastane1.setHasta(hastaBul(hastaDurumu));
-        hastaBul(hastaDurumu);
-        System.out.println("hasta ismi = " + hastane1.hasta.getIsim());
-        System.out.println("hasta soyismi = " + hastane1.hasta.getSoyIsim());
-        System.out.println("hasta ID = " + hastane1.hasta.getHastaID());
-
-
-
+        secim();
     }
 
+    public static void secim(){
+        while (true){
+            System.out.println("Doktor: 1 hasta 2");
+            int sec = sc.nextInt();
+            if(sec == 1){
+
+                doktorBul(unvan);
+            }else if(sec == 2){
+                hastaBul(hastaDurumu);
+            }
+
+
+        }
+    }
     public static String doktorUnvan(String aktuelDurum) {
 
 
@@ -67,7 +65,11 @@ public class HastaneRunner {
 //
 //                }
 //         }
+
         int idx = 0;
+
+
+
         for (String w : hastane1.unvanlar) {
             if (unvan.equals(w)) {
                 doktor.setIsim(hastane1.doktorIsimleri[idx]);
@@ -76,6 +78,11 @@ public class HastaneRunner {
             }
             idx++;
         }
+
+        System.out.println("Unvan " + doktor.getUnvan() + " ");
+        System.out.println("Doktor isimi " + doktor.getIsim() + " ");
+        System.out.println("Doktor soyisim " + doktor.getSoyIsim() + " ");
+
         return doktor;
     }
 
@@ -101,20 +108,25 @@ public class HastaneRunner {
         return hastaDurumu;
     }
 
-    public static Hasta hastaBul(String aktuelDurum){
-        Hasta hasta = new Hasta();
-        int idx=0;
+    public static Hasta hastaBul(String actualCase){
+        Hasta hasta= new Hasta();
+        int idx = 0;
 
-        for (String s : hastane1.durumlar) {
-            if (aktuelDurum.equals(s)){
+        for (String w : hastane1.durumlar) {
+
+            if(actualCase.equals(w)){
+
                 hasta.setIsim(hastane1.hastaIsimleri[idx]);
                 hasta.setSoyIsim(hastane1.hastaSoyIsimleri[idx]);
-                hasta.setHastaID((hastane1.hastaIDleri[idx]));
+                hasta.setHastaID(hastane1.hastaIDleri[idx]);
             }
             idx++;
-
         }
 
+        System.out.println("hasta ismi " +hasta.getIsim());
+        System.out.println("Hasta soyismi " + hasta.getSoyIsim());
+        System.out.println("Hasta ID " + hasta.getHastaID());
         return hasta;
     }
+
 }
