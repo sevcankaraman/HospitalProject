@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class HastaneRunner {
@@ -18,12 +19,18 @@ public class HastaneRunner {
         while (true){
             System.out.println("Doktor: 1 hasta 2");
             int sec = sc.nextInt();
-            if(sec == 1){
+            try{
+                if(sec == 1){
 
-                doktorBul(unvan);
-            }else if(sec == 2){
-                hastaBul(hastaDurumu);
+                    doktorBul(unvan);
+                }else if(sec == 2){
+                    hastaBul(hastaDurumu);
+                }
+
+            }catch(InputMismatchException e){
+                System.out.println("gecerlı deger gırınız");
             }
+
 
 
         }
@@ -50,8 +57,10 @@ public class HastaneRunner {
         } else if (aktuelDurum.equalsIgnoreCase("Kalphastaliklari")) {
             return hastane1.unvanlar[5];
 
+        }else {
+            System.out.println("aradıgınız unvan bulunamadı");
+            return "yanlış secim";
         }
-        return "yanlış secim";
     }
 
     public static Doktor doktorBul(String unvan) {
